@@ -13,8 +13,8 @@ app.use(express.json());
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "mysql",
-    database: "egzaminas",
+    password: "root",
+    database: "agurkas",
 });
 
 con.connect(function(err) {
@@ -23,10 +23,10 @@ con.connect(function(err) {
 });
 
 //Read Node
-app.get('/lentele', (req, res) => {
+app.get('/cow_farm', (req, res) => {
     const sql = `
         SELECT *
-        FROM lentele
+        FROM cow_farm
     `;
     con.query(sql, (err, results) => {
         if (err) {
@@ -37,17 +37,17 @@ app.get('/lentele', (req, res) => {
 })
 
 //Create Node
-app.post('/lentele', (req, res) => {
+app.post('/cow_farm', (req, res) => {
     const sql = `
-        INSERT INTO lentele
-        (th, th, th, th)
+        INSERT INTO cow_farm
+        (name, weight, total_milk, last_milking_time)
         VALUES (?, ?, ?, ?)
     `;
     con.query(sql, [
-        req.body.th,
-        req.body.th,
-        req.body.th,
-        req.body.th
+        req.body.name,
+        req.body.weight,
+        req.body.total_milk,
+        req.body.last_milking_time
     ], (err, results) => {
         if (err) {
             throw err;
@@ -57,17 +57,17 @@ app.post('/lentele', (req, res) => {
 })
 
 //Update Node
-app.put('/lentele/:id', (req, res) => {
+app.put('/cow_farm/:id', (req, res) => {
     const sql = `
-        UPDATE lentele
-        SET th = ?, th = ?, th = ?, th = ?
+        UPDATE cow_farm
+        SET name = ?, weight = ?, total_milk = ?, last_milking_time = ?
         WHERE id = ?
     `;
     con.query(sql, [
-        req.body.th,
-        req.body.th,
-        req.body.th,
-        req.body.th,
+        req.body.name,
+        req.body.weight,
+        req.body.total_milk,
+        req.body.last_milking_time,
         req.params.id
     ], (err, results) => {
         if (err) {
@@ -78,9 +78,9 @@ app.put('/lentele/:id', (req, res) => {
 })
 
 //Delete Node
-app.delete('/lentele/:id', (req, res) => {
+app.delete('/cow_farm/:id', (req, res) => {
     const sql = `
-        DELETE FROM lentele
+        DELETE FROM cow_farm
         WHERE id = ?
         `;
     con.query(sql, [req.params.id], (err, result) => {
@@ -93,11 +93,11 @@ app.delete('/lentele/:id', (req, res) => {
 
 
 //Filter Node
-app.get('/lentele-filter/:t', (req, res) => {
+app.get('/cow_farm-filter/:t', (req, res) => {
     const sql = `
         SELECT *
-        FROM lentele
-        WHERE th = ?
+        FROM cow_farm
+        WHERE weight = ?
     `;
     
     con.query(sql, [req.params.t], (err, results) => {
@@ -109,11 +109,11 @@ app.get('/lentele-filter/:t', (req, res) => {
 })
 
 //Search Node
-app.get('/lentele-key', (req, res) => {
+app.get('/cow_farm-weight', (req, res) => {
     const sql = `
         SELECT *
-        FROM lentele
-        WHERE key LIKE ?
+        FROM cow_farm
+        WHERE weight LIKE ?
     `;
     con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
         if (err) {
