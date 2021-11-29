@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 function Modal({ showModal, hide, modalInputs, edit }) {
   const [inputs, setInputs] = useState({
-    th: "",
-    th: "",
-    th: "",
-    th: "",
+    name: "",
+    weight: "",
+    total_milk: "",
+    last_milking_time: "",
   });
 
   const control = (e, what) => {
@@ -16,20 +16,20 @@ function Modal({ showModal, hide, modalInputs, edit }) {
 
   useEffect(() => {
     setInputs({
-      th: modalInputs.th,
-      th: modalInputs.th,
-      th: modalInputs.th,
-      th: modalInputs.th,
+        name: modalInputs.name,
+        weight: modalInputs.weight,
+        total_milk: modalInputs.total_milk,
+        last_milking_time: modalInputs.last_milking_time,
     });
   }, [modalInputs]);
 
   const handleEdit = () => {
     edit(
       {
-        th: inputs.th,
-        th: inputs.th,
-        th: inputs.th,
-        th: inputs.th,
+        name: inputs.name,
+        weight: inputs.weight,
+        total_milk: inputs.total_milk,
+        last_milking_time: inputs.last_milking_time,
       },
       modalInputs.id
     );
@@ -67,56 +67,60 @@ function Modal({ showModal, hide, modalInputs, edit }) {
           <div className="modal-body">
             <form>
               <div className="form-group">
-                <label for="th1" className="col-form-label">
-                  Th
+                <label htmlFor="name" className="col-form-label">
+                  Name
                 </label>
                 <input
                   className="form-control"
                   type="text"
-                  id="th1"
-                  value={inputs.th}
-                  onChange={(e) => control(e, "th")}
-                  placeholder="Enter th"
+                  id="name"
+                  value={inputs.name}
+                  onChange={(e) => control(e, "name")}
+                  placeholder="Enter name"
                 />
               </div>
+
+
               <div className="form-group">
-                <label for="th2" className="col-form-label">
-                  Th
+                <label htmlFor="weight" className="col-form-label">
+                Weight
                 </label>
                 <input
                   className="form-control"
                   type="text"
-                  id="th2"
-                  value={inputs.th}
-                  onChange={(e) => control(e, "th")}
-                  placeholder="Enter th"
+                  id="weight"
+                  value={inputs.weight}
+                  onChange={(e) => control(e, "weight")}
+                  placeholder="Enter weight"
                 />
               </div>
+
+
               <div className="form-group">
-                <label for="th3" className="col-form-label">
-                  Th
+                <label htmlFor="total_milk" className="col-form-label">
+                Total_Milk
                 </label>
                 <input
                   className="form-control"
                   type="text"
-                  id="th3"
-                  value={inputs.th}
-                  onChange={(e) => control(e, "th")}
-                  placeholder="Enter th"
+                  id="total_milk"
+                  value={inputs.total_milk}
+                  onChange={(e) => control(e, "total_milk")}
+                  placeholder="Enter total_milk"
                 />
               </div>
 
               <div className="form-group">
-                <label for="th4" className="col-form-label">
-                  Th
+                <label htmlFor="last_milking_time" className="col-form-label">
+                Last_Milking_Time
                 </label>
                 <input
                   className="form-control"
-                  type="text"
-                  id="th4"
-                  value={inputs.th}
-                  onChange={(e) => control(e, "th")}
-                  placeholder="Enter th"
+                  type="date"
+                  id="last_milking_time"
+                  value={inputs.last_milking_time}
+                  onChange={(e) => control(e, "last_milking_time")}
+                  placeholder="Enter last_milking_time"
                 />
               </div>
 
