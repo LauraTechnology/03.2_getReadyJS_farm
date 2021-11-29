@@ -55,6 +55,15 @@ function App() {
   const hide = () => {
     setShowModal(false);
   };
+
+  const remove = (id) => {
+    setShowModal(false);
+    axios.delete('http://localhost:3003/kolt_scooters/'+id)
+        .then(res => {
+            console.log(res.data);
+            setLastUpdate(Date.now());
+        })
+  }
   
   return (
     <div className="App">
@@ -80,7 +89,7 @@ function App() {
                     hide={hide}
                     edit={edit}
                   />
-                  <List table={table} modal={modal} />
+                  <List table={table} modal={modal} remove={remove} />
                   </tbody>
                 </table>
               </div>
