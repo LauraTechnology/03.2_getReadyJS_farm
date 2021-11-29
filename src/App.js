@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
+import Create from "./Components/Create";
 
 function App() {
   const [table, setTable] = useState([]);
@@ -23,7 +24,14 @@ function App() {
     });
   };
 
-
+//Create React
+const create = item => {
+  axios.post('http://localhost:3003/cow_farm', item)
+  .then(res => {
+    console.log(res.data);
+    setLastUpdate(Date.now());
+  })
+}
 
 //Read React
   useEffect(() => {
@@ -67,11 +75,12 @@ function App() {
   
   return (
     <div className="App">
+      <Create create={create}></Create>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
             <div className="card">
-              <div className="card-header">List of X</div>
+              <div className="card-header">List of Cows</div>
               <div className="card-body">
                 <table className="table">
                   <tbody>
@@ -80,8 +89,7 @@ function App() {
                     <th>Weight</th>
                     <th>Total_Milk</th>
                     <th>Last_Milking_Time</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                
                   </tr>
                   <Modal
                     showModal={showModal}

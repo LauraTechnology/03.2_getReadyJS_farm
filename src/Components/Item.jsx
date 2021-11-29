@@ -1,4 +1,5 @@
 // 5. Item.jsx (vietoj th įsistatom lentelės stulpelių pavadinimus)
+
 function Item({ data, modal, remove }) {
   const showEdit = () => {
     modal(data);

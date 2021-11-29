@@ -22,6 +22,7 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
+
 //Read Node
 app.get('/cow_farm', (req, res) => {
     const sql = `
@@ -35,6 +36,7 @@ app.get('/cow_farm', (req, res) => {
         res.send(results);
     })
 })
+
 
 //Create Node
 app.post('/cow_farm', (req, res) => {
@@ -90,6 +92,8 @@ app.delete('/cow_farm/:id', (req, res) => {
         res.send(result);
     })
 })
+
+
 
 
 //Filter Node
