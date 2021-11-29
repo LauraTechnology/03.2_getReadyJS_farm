@@ -9,24 +9,38 @@ function App() {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
   const [modalInputs, setModalInputs] = useState({
-    th: "",
-    th: "",
-    th: "",
-    th: "",
+    name: "",
+    weight: "",
+    total_milk: "",
+    last_milking_time: "",
   });
+
+  const dateOnly = (data) => {
+    return data.map((a) => {
+      a.last_milking_time = a.last_milking_time.slice(0, 10);
+
+      return a;
+    });
+  };
+
+
+
 //Read React
   useEffect(() => {
     axios
-      .get("http://localhost:3003/lentele")
+      .get("http://localhost:3003/cow_farm")
       .then((res) => {
-        setTable(res.data);
+        setTable(dateOnly(res.data));
       })
       .catch((err) => console.log(err));
   }, [lastUpdate]);
+
+
+
 //Update React
   const edit = (item, id) => {
     setShowModal(false);
-    axios.put('http://localhost:3003/lentele/' + id, item)
+    axios.put('http://localhost:3003/cow_farm/' + id, item)
     .then(res => {
         setLastUpdate(Date.now());
     })
@@ -51,11 +65,12 @@ function App() {
               <div className="card-header">List of X</div>
               <div className="card-body">
                 <table className="table">
+                  <tbody>
                   <tr>
-                    <th>Th</th>
-                    <th>Th</th>
-                    <th>Th</th>
-                    <th>Th</th>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Total_Milk</th>
+                    <th>Last_Milking_Time</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
@@ -66,6 +81,7 @@ function App() {
                     edit={edit}
                   />
                   <List table={table} modal={modal} />
+                  </tbody>
                 </table>
               </div>
             </div>
