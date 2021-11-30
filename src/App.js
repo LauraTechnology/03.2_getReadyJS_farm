@@ -66,7 +66,7 @@ const create = item => {
 
   const remove = (id) => {
     setShowModal(false);
-    axios.delete('http://localhost:3003/kolt_scooters/'+id)
+    axios.delete('http://localhost:3003/cow_farm/'+id)
         .then(res => {
             console.log(res.data);
             setLastUpdate(Date.now());
